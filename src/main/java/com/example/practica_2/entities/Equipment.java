@@ -3,6 +3,7 @@ package com.example.practica_2.entities;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -15,6 +16,6 @@ public class Equipment {
     private String name;
     private int amountInExistence;
     private long rentByDayCost;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Receipt> receiptList;
 }

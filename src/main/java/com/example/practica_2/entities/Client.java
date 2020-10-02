@@ -3,6 +3,7 @@ package com.example.practica_2.entities;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
@@ -22,6 +23,6 @@ public class Client {
      */
     @Lob
     private String base64Image;
-    @OneToMany
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private List<Receipt> receiptsList;
 }
