@@ -1,5 +1,6 @@
 package com.example.practica_2.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Client {
+public class Client implements Serializable{
     @Id
     @GeneratedValue
     private long id;
