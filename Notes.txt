@@ -1,0 +1,6 @@
+Loans and Receipts are the same class.
+What sets them apart is the hasBeenReturned class.
+If true, false, the Receipt is a loan still. Otherwise it is 
+really a Receipt. If the client decides to return some borrowed items 
+of the same loan, but not all, a new clone Receipt will be created, with the 
+hasBeenReturned property set to true.
