@@ -21,6 +21,9 @@ public class User implements Serializable{
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> rolesList;
 
+    public User(){
+    }
+
     public User(long id, String name, String password) {
         this.setId(id);
         this.setName(name);

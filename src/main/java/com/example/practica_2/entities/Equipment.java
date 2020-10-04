@@ -18,6 +18,9 @@ public class Equipment implements Serializable{
     private int amountInExistence;
     private long rentByDayCost;
 
+    public Equipment(){
+    }
+
     public Equipment(long id, String name, int amountInExistence, long rentByDayCost) {
         this.setId(id);
         this.setName(name);

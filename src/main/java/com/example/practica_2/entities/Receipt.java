@@ -30,6 +30,9 @@ public class Receipt implements Serializable{
     @Temporal(TemporalType.DATE)
     private Date returnDate;
 
+    public Receipt() {
+    }
+
     public Receipt(long id, Date rentDate, Date promisedReturnDate, Client client) {
         this.setId(id);
         this.setRentDate(rentDate);
