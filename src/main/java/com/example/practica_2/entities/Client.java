@@ -11,11 +11,12 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Client implements Serializable{
+public class Client implements Serializable {
     @Id
     @GeneratedValue
     private long id;
     private String name;
+    private String identificationCard;
     /**
      * @Lob Specifies that a persistent property or field should be persisted as a
      *      large object to a database-supported large object type.
@@ -25,12 +26,21 @@ public class Client implements Serializable{
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private List<Receipt> receiptsList;
 
-    public Client(){
+    public Client() {
     }
 
-    public Client(long id, String name) {
+    public String getIdentificationCard() {
+        return identificationCard;
+    }
+
+    public void setIdentificationCard(String identificationCard) {
+        this.identificationCard = identificationCard;
+    }
+
+    public Client(long id, String name, String identificationCard) {
         this.setId(id);
         this.setName(name);
+        this.setIdentificationCard(identificationCard);
     }
 
     public long getId() {
