@@ -17,8 +17,6 @@ public class Equipment implements Serializable{
     private String name;
     private int amountInExistence;
     private long rentByDayCost;
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Receipt> receiptList;
 
     public Equipment(long id, String name, int amountInExistence, long rentByDayCost) {
         this.setId(id);
@@ -57,13 +55,5 @@ public class Equipment implements Serializable{
 
     public void setRentByDayCost(long rentByDayCost) {
         this.rentByDayCost = rentByDayCost;
-    }
-
-    public List<Receipt> getReceiptList() {
-        return receiptList;
-    }
-
-    public void setReceiptList(List<Receipt> receiptList) {
-        this.receiptList = receiptList;
     }
 }

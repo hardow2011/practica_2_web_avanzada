@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import java.io.Serializable;
@@ -17,7 +18,7 @@ public class User implements Serializable{
     private long id;
     private String name;
     private String password;
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> rolesList;
 
     public User(long id, String name, String password) {

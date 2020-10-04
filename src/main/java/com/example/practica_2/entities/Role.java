@@ -15,8 +15,6 @@ public class Role implements Serializable{
     @GeneratedValue
     private long id;
     private String name;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private List<User> usersList;
 
     public Role(long id, String name) {
         this.setId(id);
@@ -37,13 +35,5 @@ public class Role implements Serializable{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<User> getUsersList() {
-        return usersList;
-    }
-
-    public void setUsersList(List<User> usersList) {
-        this.usersList = usersList;
     }
 }
