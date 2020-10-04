@@ -29,8 +29,8 @@
                 <input <#if visualizar??>readonly</#if> type="text" class="form-control" id="inputName" name="name" value="${(client.name)!}" placeholder="Digite el nombre">
                 <label for="inputIdentificationCard">Cédula</label>
                 <input <#if visualizar??>readonly</#if> type="text" class="form-control" id="inputIdentificationCard" name="identificationCard" value="${(client.identificationCard)!}" placeholder="Digite la cédula">
-                <label for="inputPicture">Foto</label>
-                <input <#if visualizar??>readonly</#if> type="file" class="form-control" id="inputPicture" name="base64Image" value="${(client.base64Image)!}">
+                <label for="inputRawImage">Foto</label>
+                <input <#if visualizar??>readonly</#if> type="file" class="form-control" id="inputRawImage" name="rawImage" value="${(client.base64Image)!}">
             </div>
             <#if visualizar??>
                 <a href="/clients/list" class="btn btn-secondary float-right">Listar clientes</a>
