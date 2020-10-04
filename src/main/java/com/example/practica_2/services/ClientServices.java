@@ -1,5 +1,7 @@
 package com.example.practica_2.services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import com.example.practica_2.entities.Client;
@@ -23,6 +25,10 @@ public class ClientServices {
     public Client save(Client client){
         clientRepository.save(client);
         return client;
+    }
+
+    public List<Client> findAll(){
+        return clientRepository.findAll();
     }
 
 }

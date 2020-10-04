@@ -1,6 +1,7 @@
 package com.example.practica_2.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.example.practica_2.entities.Client;
 import com.example.practica_2.services.ClientServices;
@@ -33,14 +34,13 @@ public class ClientController {
     @GetMapping("/create")
     public String createClient(Model model) {
         model.addAttribute("client", new Client());
-        model.addAttribute("action", "Crear");
+        model.addAttribute("action", "Crear cliente");
         model.addAttribute("postAddress", "/clients/create");
         return "createEditViewClient";
     }
 
-    @ResponseBody
     @PostMapping("/create")
-    public Client createClient(@RequestParam("rawImage") MultipartFile rawImage, Client client) throws IOException {
+    public String createClient(@RequestParam("rawImage") MultipartFile rawImage, Client client) throws IOException {
 
         // If raw image is not null, otherwise, the image of the client will be "data:image/png;base64,"
         if(rawImage != null){
@@ -56,7 +56,15 @@ public class ClientController {
         }
 
         clientServices.save(client);
-        return client;
+        return "redirect:/clients/";
+    }
+
+    @GetMapping({"/", ""})
+    public String listClients(Model model) {
+        List<Client> clientList = clientServices.findAll();
+        model.addAttribute("clientList", clientList);
+        model.addAttribute("action", "Lista de clientes");
+        return "listClients";
     }
 
 }
