@@ -10,15 +10,25 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Equipment implements Serializable{
+public class Equipment implements Serializable {
     @Id
     @GeneratedValue
     private long id;
     private String name;
     private int amountInExistence;
     private long rentByDayCost;
+    @ManyToMany(mappedBy = "equipmentsList")
+    private List<Receipt> receiptsList;
 
-    public Equipment(){
+    public Equipment() {
+    }
+
+    public List<Receipt> getReceiptsList() {
+        return receiptsList;
+    }
+
+    public void setReceiptsList(List<Receipt> receiptsList) {
+        this.receiptsList = receiptsList;
     }
 
     public Equipment(long id, String name, int amountInExistence, long rentByDayCost) {
