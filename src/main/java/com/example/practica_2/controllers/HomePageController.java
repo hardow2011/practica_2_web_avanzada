@@ -10,6 +10,6 @@ public class HomePageController {
 
     @GetMapping("/")
     public String redirectToClientsCreate(){
-        return "redirect:/clients/create";
+        return "redirect:/clients";
     }
 }

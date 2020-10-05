@@ -27,8 +27,17 @@ public class ClientServices {
         return client;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Client> findAll(){
         return clientRepository.findAll();
+    }
+
+    public Client findById(long clientId){
+        Client client = clientRepository.findById(clientId).get();
+        return client;
     }
 
 }
