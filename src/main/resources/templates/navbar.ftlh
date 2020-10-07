@@ -10,6 +10,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/clients/">Clientes</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/equipments/">Equipos</a>
+                </li>
         </div>
     </nav>
 </#macro>

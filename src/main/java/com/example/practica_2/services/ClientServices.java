@@ -40,4 +40,8 @@ public class ClientServices {
         return client;
     }
 
+    public void delete(Client client) {
+        clientRepository.delete(client);
+    }
+
 }

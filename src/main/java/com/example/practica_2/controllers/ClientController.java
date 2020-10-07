@@ -98,6 +98,13 @@ public class ClientController {
         return "createUpdateViewClient";
     }
 
+    /**
+     *
+     * @param rawImage
+     * @param client
+     * @return
+     * @throws IOException
+     */
     @PostMapping("/update")
     public String updateClient(@RequestParam("rawImage") MultipartFile rawImage, Client client) throws IOException {
         // If raw image is not empty, otherwise, the image of the client would be "data:image/png;base64," and I want it to be null if non existent
@@ -117,6 +124,12 @@ public class ClientController {
         return "redirect:/clients/";
     }
 
+    /**
+     *
+     * @param model
+     * @param clientId
+     * @return
+     */
     @GetMapping("/view/{clientId}")
     public String viewClient(Model model, @PathVariable() Long clientId) {
         Client client = clientServices.findById(clientId);
@@ -124,6 +137,13 @@ public class ClientController {
         model.addAttribute("client", client);
         model.addAttribute("view", true);
         return "createUpdateViewClient";
+    }
+
+    @GetMapping("/delete/{clientId}")
+    public String deleteClient(@PathVariable() Long clientId) {
+        Client client = clientServices.findById(clientId);
+        clientServices.delete(client);
+        return "redirect:/clients/";
     }
 
 }
