@@ -3,17 +3,26 @@ package com.example.practica_2.controllers;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.example.practica_2.entities.Client;
 import com.example.practica_2.entities.Equipment;
 import com.example.practica_2.entities.Receipt;
+import com.example.practica_2.repository.ReceiptRepository;
 import com.example.practica_2.services.ClientServices;
 import com.example.practica_2.services.EquipmentServices;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.StringUtils;
+import org.hibernate.sql.Insert;
+import org.joda.time.Days;
+import org.joda.time.ReadableInstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -31,8 +40,11 @@ public class EquipmentController {
     @Autowired
     private EquipmentServices equipmentServices;
 
+    @Autowired
+    private ReceiptRepository receiptRepository;
+
     @GetMapping({ "/", "" })
-    public String listEquipments(Model model) {
+    public String listEquipments() {
         return "redirect:/equipments/inStock";
     }
 
@@ -40,7 +52,24 @@ public class EquipmentController {
     public String listEquipmentsInStock(Model model) {
         List<Equipment> equipmentsList = equipmentServices.findAll();
         model.addAttribute("equipmentsList", equipmentsList);
-        model.addAttribute("action", "Lista de equipos");
+        model.addAttribute("action", "Lista de equipos disponibles");
+        model.addAttribute("status", "InStock");
+        return "listEquipments";
+    }
+
+    @GetMapping("/rented")
+    public String listRentedEquipments(Model model) {
+        List<Receipt> receiptsList = receiptRepository.getActiveReceiptsOldestFirst();
+        model.addAttribute("equipmentsList", receiptsList);
+
+        List<Integer> differenceInDays = new ArrayList<Integer>();
+
+        for (Receipt receipt: receiptsList) {
+            Period.between(receipt.getRentDate().toLocalDate(), new Date());
+        }
+
+        model.addAttribute("action", "Lista de equipos alquilados");
+        model.addAttribute("status", "rented");
         return "listEquipments";
     }
 

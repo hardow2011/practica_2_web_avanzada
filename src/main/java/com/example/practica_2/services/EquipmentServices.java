@@ -22,6 +22,10 @@ public class EquipmentServices {
         return equipment;
     }
 
+    public List<Equipment> getEquipmentsOldestFirst() {
+        return equipmentRepository.getEquipmentsOldestFirst();
+    }
+
     public List<Equipment> findAll(){
         return equipmentRepository.findAll();
     }

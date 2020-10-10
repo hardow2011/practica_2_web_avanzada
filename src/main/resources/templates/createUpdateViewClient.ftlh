@@ -36,14 +36,10 @@
                     <input type="file" class="form-control" id="inputRawImage" name="rawImage">
                 </#if>
             </div>
-            <#if view??>
-                <a href="/clients/list" class="btn btn-secondary float-right">Listar clientes</a>
-            <#else>
             <#if !view??>
                 <button id="btnSubmitClient" type="submit" class="btn btn-primary float-right">Confirmar</button>
             <#else>
                 <button id="btnSubmitClient" href="/clients/" class="btn btn-secondary float-right">Regresar a la lista</button>
-            </#if>
             </#if>
         </form>
     </div>

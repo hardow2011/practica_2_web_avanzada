@@ -1,5 +1,7 @@
 package com.example.practica_2.services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import com.example.practica_2.entities.Receipt;
@@ -18,6 +20,10 @@ public class ReceiptServices {
     public Receipt save(Receipt receipt){
         receiptRepository.save(receipt);
         return receipt;
+    }
+
+    public List<Receipt> getActiveReceiptsOldestFirst() {
+        return receiptRepository.getActiveReceiptsOldestFirst();
     }
 
 }
