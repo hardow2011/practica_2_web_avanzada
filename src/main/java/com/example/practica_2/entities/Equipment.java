@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Equipment implements Serializable {
@@ -17,10 +19,20 @@ public class Equipment implements Serializable {
     private String name;
     private int amountInExistence;
     private long rentByDayCost;
-    @ManyToMany(mappedBy = "equipmentsList")
+    @OneToMany(mappedBy = "equipment")
     private List<Receipt> receiptsList;
+    @Lob
+    private String base64Image;
 
     public Equipment() {
+    }
+
+    public String getBase64Image() {
+        return base64Image;
+    }
+
+    public void setBase64Image(String base64Image) {
+        this.base64Image = base64Image;
     }
 
     public List<Receipt> getReceiptsList() {
@@ -36,6 +48,17 @@ public class Equipment implements Serializable {
         this.setName(name);
         this.setAmountInExistence(amountInExistence);
         this.setRentByDayCost(rentByDayCost);
+    }
+
+    /**
+     * Substract from inventory when borrowed
+     * @param quantity
+     * @return
+     */
+    public int substractLentItems(int quantity){
+        int NewAmountInExistence = amountInExistence - quantity;
+        this.setAmountInExistence(NewAmountInExistence);
+        return NewAmountInExistence;
     }
 
     public long getId() {

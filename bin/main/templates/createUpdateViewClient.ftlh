@@ -23,11 +23,11 @@
             </#if>
             <div class="form-group">
                 <label for="inputName">Nombre</label>
-                <input <#if view??>readonly</#if> type="text" class="form-control" id="inputName" name="name" value="${(client.name)!}" placeholder="Digite el nombre">
+                <input <#if view??>readonly</#if> type="text" class="form-control" id="inputName" name="name" value="${(client.name)!}" placeholder="Digite el nombre" required>
                 <label for="inputIdentificationCard">Cédula</label>
-                <input <#if view??>readonly</#if> type="text" class="form-control" id="inputIdentificationCard" name="identificationCard" value="${(client.identificationCard)!}" placeholder="Digite la cédula">
+                <input <#if view??>readonly</#if> type="text" class="form-control" id="inputIdentificationCard" name="identificationCard" value="${(client.identificationCard)!}" placeholder="Digite la cédula" required>
+                <label for="inputRawImage">Foto</label>
                 <#if client.base64Image?has_content>
-                    <label for="inputRawImage">Foto</label>
                     <div>
                         <img width=315px; src="${client.base64Image}" alt"No hay foto">
                     </div>

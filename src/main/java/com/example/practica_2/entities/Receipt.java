@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -21,21 +22,23 @@ public class Receipt implements Serializable{
     private Date rentDate;
     @Temporal(TemporalType.DATE)
     private Date promisedReturnDate;
-    @ManyToMany
-    private List<Equipment> equipmentsList;
+    @ManyToOne
+    private Equipment equipment;
     private int quantity;
     @ManyToOne
     private Client client;
     private boolean hasBeenReturned;
     @Temporal(TemporalType.DATE)
-    private Date returnDate;
+    private Date returnedDate;
 
     public Receipt() {
     }
 
-    public Receipt(long id, Date rentDate, Date promisedReturnDate, Client client) {
+    public Receipt(Date rentDate, Date promisedReturnDate, Equipment equipment, int quantity, Client client) {
         this.setId(id);
         this.setRentDate(rentDate);
+        this.setEquipment(equipment);
+        this.setQuantity(quantity);
         this.setPromisedReturnDate(promisedReturnDate);
         this.setClient(client);
         this.setHasBeenReturned(false);
@@ -65,12 +68,12 @@ public class Receipt implements Serializable{
         this.promisedReturnDate = promisedReturnDate;
     }
 
-    public List<Equipment> getEquipmentsList() {
-        return equipmentsList;
+    public Equipment getEquipment() {
+        return equipment;
     }
 
-    public void setEquipmentsList(List<Equipment> equipmentsList) {
-        this.equipmentsList = equipmentsList;
+    public void setEquipment(Equipment equipment) {
+        this.equipment = equipment;
     }
 
     public int getQuantity() {
@@ -97,11 +100,11 @@ public class Receipt implements Serializable{
         this.hasBeenReturned = hasBeenReturned;
     }
 
-    public Date getReturnDate() {
-        return returnDate;
+    public Date getReturnedDate() {
+        return returnedDate;
     }
 
-    public void setReturnDate(Date returnDate) {
-        this.returnDate = returnDate;
+    public void setReturnedDate(Date returnedDate) {
+        this.returnedDate = returnedDate;
     }
 }
