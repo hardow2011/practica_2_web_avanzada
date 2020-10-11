@@ -6,10 +6,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.example.practica_2.entities.Client;
 import com.example.practica_2.entities.Equipment;
@@ -33,6 +38,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import ch.qos.logback.core.util.Duration;
+
 @Controller
 @RequestMapping("equipments")
 public class EquipmentController {
@@ -53,21 +60,29 @@ public class EquipmentController {
         List<Equipment> equipmentsList = equipmentServices.findAll();
         model.addAttribute("equipmentsList", equipmentsList);
         model.addAttribute("action", "Lista de equipos disponibles");
-        model.addAttribute("status", "InStock");
+        model.addAttribute("status", "inStock");
         return "listEquipments";
     }
 
     @GetMapping("/rented")
-    public String listRentedEquipments(Model model) {
+    public String listRentedEquipments(Model model) throws ParseException {
         List<Receipt> receiptsList = receiptRepository.getActiveReceiptsOldestFirst();
         model.addAttribute("equipmentsList", receiptsList);
 
-        List<Integer> differenceInDays = new ArrayList<Integer>();
+        List<Long> differenceInDays = new ArrayList<Long>();
 
+        Date today = new SimpleDateFormat("yyyy-MM-dd").parse(new Date().toString());
+
+        System.out.println("\n\n");
         for (Receipt receipt: receiptsList) {
-            Period.between(receipt.getRentDate().toLocalDate(), new Date());
+
+            long diff = today.getTime() - receipt.getRentDate().getTime();
+            System.out.println(today+" "+receipt.getRentDate()+" "+diff+" "+TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+            differenceInDays.add(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
         }
 
+        model.addAttribute("receiptsList", receiptsList);
+        model.addAttribute("differenceInDays", differenceInDays);
         model.addAttribute("action", "Lista de equipos alquilados");
         model.addAttribute("status", "rented");
         return "listEquipments";

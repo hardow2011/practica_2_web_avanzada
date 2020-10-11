@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ReceiptRepository extends JpaRepository<Receipt, Long>{
 
-    @Query(value = "SELECT r.* FROM Receipt as r on r.has_been_returned = false order by r.rent_date desc", nativeQuery = true)
+    @Query(value = "SELECT * FROM Receipt as r", nativeQuery = true)
     List<Receipt> getActiveReceiptsOldestFirst();
 
 }

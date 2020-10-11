@@ -50,15 +50,11 @@ public class ReceiptController {
 
         Receipt receipt = new Receipt(new Date(), parsedReturnDate, equipment, quantity, client);
 
-        // System.out.println("\n\n\n"+receipt.getId()+" "+receipt.getClient().getId()+" "+receipt.getRentDate()+" "+receipt.getPromisedReturnDate()+"\n\n\n");
-
         receiptRepository.save(receipt);
 
         equipment.substractLentItems(quantity);
 
         equipmentRepository.save(equipment);
-
-        System.out.println("\n\n"+equipment.getAmountInExistence()+"\n\n");
 
         return "redirect:/equipments/";
     }

@@ -25,7 +25,7 @@
                     <#elseif status == "rented">
                         <th>Días alquilados</th>
                         <th>Cliente</th>
-                    <#if>
+                    </#if>
                     <th class="text-center">Acción</th>
                 </tr>
             </thead>
@@ -46,14 +46,17 @@
                     </#foreach>
                 </tbody>
                 <#elseif status == "rented">
-                    <#foreach receipt in receiptsList>
-                        <tr>
-                            <td>${receipt.equipment.id}</td>
-                            <td>${receipt.equipment.name}</td>
-                            <td>${receipt.equipment.id}</td>
-                        </tr>
-                    </#foreach>
-                <#if>
+                    <#if receiptsList??>
+                        <#list receiptsList as receipt>
+                            <tr>
+                                <td>${receipt.equipment.id}</td>
+                                <td>${receipt.equipment.name}</td>
+                                <td>${differenceInDays[receipt?index]}</td>
+                                <td>${receipt.client.name}</td>
+                            </tr>
+                        </#list>
+                    </#if>
+                </#if>
         </table>
     </div>
     <@additionalDependencies/>
