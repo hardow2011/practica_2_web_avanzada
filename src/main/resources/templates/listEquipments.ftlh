@@ -53,6 +53,7 @@
                                 <td>${receipt.equipment.name}</td>
                                 <td>${differenceInDays[receipt?index]}</td>
                                 <td>${receipt.client.name}</td>
+                                <a class="btn btn-success" href="/receipts/recover/${receipt.id}">Recuperar</a>
                             </tr>
                         </#list>
                     </#if>

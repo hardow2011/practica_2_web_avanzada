@@ -44,6 +44,7 @@ public class ReceiptController {
             @RequestParam(required = true) int clientId, @RequestParam(required = true) String promisedReturnDate)
             throws ParseException {
 
+        System.out.println("\n\n"+promisedReturnDate+"\n\n");
         Date parsedReturnDate = new SimpleDateFormat("yyyy-MM-dd").parse(promisedReturnDate);
 
         Client client = clientServices.findById(clientId);

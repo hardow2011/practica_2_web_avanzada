@@ -71,14 +71,26 @@ public class EquipmentController {
 
         List<Long> differenceInDays = new ArrayList<Long>();
 
-        Date today = new SimpleDateFormat("yyyy-MM-dd").parse(new Date().toString());
+        // Define the date pattern
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+        // Get today's date in String and convert it to Date
+        String todayString = simpleDateFormat.format(new Date());
+        Date today = simpleDateFormat.parse(todayString);
 
         System.out.println("\n\n");
         for (Receipt receipt: receiptsList) {
 
-            long diff = today.getTime() - receipt.getRentDate().getTime();
-            System.out.println(today+" "+receipt.getRentDate()+" "+diff+" "+TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
-            differenceInDays.add(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+            Date parsedReturnDate = simpleDateFormat.parse(receipt.getRentDate().toString());
+
+            // Get the difference in milliseconds and convert it to days
+            long diff = TimeUnit.MILLISECONDS.toDays(parsedReturnDate.getTime() - today.getTime());
+            System.out.println(today+" "+parsedReturnDate);
+            System.out.println(today.getTime()+" "+parsedReturnDate.getTime());
+            System.out.println(diff);
+
+            differenceInDays.add(diff);
         }
 
         model.addAttribute("receiptsList", receiptsList);
