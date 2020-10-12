@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -13,10 +15,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.example.practica_2.services.EquipmentServices;
+
 @Entity
 public class Receipt implements Serializable{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Temporal(TemporalType.DATE)
     private Date rentDate;
@@ -42,6 +46,12 @@ public class Receipt implements Serializable{
         this.setPromisedReturnDate(promisedReturnDate);
         this.setClient(client);
         this.setHasBeenReturned(false);
+    }
+
+    public int recoverPartialItems(int quantityToBeRecovered){
+        int newQuantity = quantity - quantityToBeRecovered;
+        this.setQuantity(newQuantity);
+        return newQuantity;
     }
 
     public long getId() {

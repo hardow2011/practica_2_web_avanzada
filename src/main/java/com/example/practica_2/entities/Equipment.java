@@ -1,6 +1,7 @@
 package com.example.practica_2.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -20,8 +21,9 @@ public class Equipment implements Serializable {
     private String name;
     private int amountInExistence;
     private long rentByDayCost;
+    // = new ArrayList<>() is necesary. Otherwise relation will not work.
     @OneToMany(mappedBy = "equipment")
-    private List<Receipt> receiptsList;
+    private List<Receipt> receiptsList = new ArrayList<>();
     @Lob
     private String base64Image;
 
@@ -57,9 +59,15 @@ public class Equipment implements Serializable {
      * @return
      */
     public int substractLentItems(int quantity){
-        int NewAmountInExistence = amountInExistence - quantity;
-        this.setAmountInExistence(NewAmountInExistence);
-        return NewAmountInExistence;
+        int newAmountInExistence = amountInExistence - quantity;
+        this.setAmountInExistence(newAmountInExistence);
+        return newAmountInExistence;
+    }
+
+    public int addRecoverItems(int quantity){
+        int newAmountInExistence = amountInExistence + quantity;
+        this.setAmountInExistence(newAmountInExistence);
+        return newAmountInExistence;
     }
 
     public long getId() {

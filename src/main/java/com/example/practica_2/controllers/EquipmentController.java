@@ -79,16 +79,12 @@ public class EquipmentController {
         String todayString = simpleDateFormat.format(new Date());
         Date today = simpleDateFormat.parse(todayString);
 
-        System.out.println("\n\n");
         for (Receipt receipt: receiptsList) {
 
             Date parsedReturnDate = simpleDateFormat.parse(receipt.getRentDate().toString());
 
             // Get the difference in milliseconds and convert it to days
             long diff = TimeUnit.MILLISECONDS.toDays(parsedReturnDate.getTime() - today.getTime());
-            System.out.println(today+" "+parsedReturnDate);
-            System.out.println(today.getTime()+" "+parsedReturnDate.getTime());
-            System.out.println(diff);
 
             differenceInDays.add(diff);
         }

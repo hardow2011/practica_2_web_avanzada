@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.example.practica_2.entities.Equipment;
 import com.example.practica_2.entities.Receipt;
 import com.example.practica_2.repository.ReceiptRepository;
 
@@ -25,5 +26,9 @@ public class ReceiptServices {
     public List<Receipt> getActiveReceiptsOldestFirst() {
         return receiptRepository.getActiveReceiptsOldestFirst();
     }
+
+	public Receipt findById(Long equipmentId) {
+		return receiptRepository.findById(equipmentId).get();
+	}
 
 }

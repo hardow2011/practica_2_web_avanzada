@@ -10,8 +10,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/clients/">Clientes</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Equipos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="nav-link" href="/equipments/inStock">En almacen</a>
+                    <a class="nav-link" href="/equipments/rented">Alquilados</a>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/equipments/">Equipos</a>
+                    <a class="nav-link" href="/clients/">Facturas</a>
                 </li>
         </div>
     </nav>

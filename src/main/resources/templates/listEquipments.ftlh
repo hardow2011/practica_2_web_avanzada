@@ -23,6 +23,7 @@
                         <th>Cantidad en existencia</th>
                         <th>Cantidad por renta diaria</th>
                     <#elseif status == "rented">
+                        <th>Cantidad</th>
                         <th>Días alquilados</th>
                         <th>Cliente</th>
                     </#if>
@@ -51,9 +52,10 @@
                             <tr>
                                 <td>${receipt.equipment.id}</td>
                                 <td>${receipt.equipment.name}</td>
+                                <td>${receipt.quantity}</td>
                                 <td>${differenceInDays[receipt?index]}</td>
                                 <td>${receipt.client.name}</td>
-                                <a class="btn btn-success" href="/receipts/recover/${receipt.id}">Recuperar</a>
+                                <td class="text-center"><a class="btn btn-success" href="/receipts/recover/${receipt.id}">Recuperar</a></td>
                             </tr>
                         </#list>
                     </#if>
