@@ -17,10 +17,10 @@
                 <input readonly type="number" class="form-control" id="inputId" name="id" value="${(receipt.id)!}">
                 <label for="inputName">Nombre del cliente</label>
                 <input readonly readonly type="text" class="form-control" id="inputName" name="clientName" value="${(receipt.client.name)!}">
-                <label for="inputQuantity">Cantidad en alquiada</label>
+                <label for="inputQuantity">Cantidad en alquiler</label>
                 <input readonly type="number" min="1" max="${(receipt.quantity)!}" value="${(receipt.quantity)!}" class="form-control" id="inputQuantity" name="inputAmountInExistence">
                 <label for="inputRentByDayCost">Cantidad para la renta diaria</label>
-                <input readonlytype="number" min="1" class="form-control" id="inputRentByDayCost" name="rentByDayCost" value="${(receipt.equipment.rentByDayCost)!}">
+                <input readonly type="number" min="1" class="form-control" id="inputRentByDayCost" name="rentByDayCost" value="${(receipt.equipment.rentByDayCost)!}">
                 <#if receipt.equipment.base64Image?has_content>
                     <label for="inputRawImage">Foto</label>
                     <div>

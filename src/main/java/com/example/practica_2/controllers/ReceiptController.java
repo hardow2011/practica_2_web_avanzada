@@ -3,6 +3,7 @@ package com.example.practica_2.controllers;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import com.example.practica_2.entities.Client;
 import com.example.practica_2.entities.Equipment;
@@ -102,6 +103,13 @@ public class ReceiptController {
             Receipt newReceipt = new Receipt(receipt.getRentDate(), receipt.getPromisedReturnDate(), receipt.getEquipment(), quantityToBeRecovered, receipt.getClient());
             newReceipt.setHasBeenReturned(true);
             newReceipt.setReturnedDate(new Date());
+
+            Date parsedReturnDate = simpleDateFormat.parse(receipt.getRentDate().toString());
+            long amountOfDaysRented = TimeUnit.MILLISECONDS.toDays(today.getTime() - parsedReturnDate.getTime());
+
+            // The total cost is the amount for renting per day, times the amount of days, time the quantity of items.
+            double totalCost = equipment.getRentByDayCost() * amountOfDaysRented * quantityToBeRecovered;
+            newReceipt.setTotalCost(totalCost);
             receiptServices.save(newReceipt);
 
             receipt.recoverPartialItems(quantityToBeRecovered);

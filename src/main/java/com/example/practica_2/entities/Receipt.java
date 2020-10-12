@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 import com.example.practica_2.services.EquipmentServices;
 
 @Entity
-public class Receipt implements Serializable{
+public class Receipt implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -34,8 +34,17 @@ public class Receipt implements Serializable{
     private boolean hasBeenReturned;
     @Temporal(TemporalType.DATE)
     private Date returnedDate;
+    private double totalCost;
 
     public Receipt() {
+    }
+
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
     }
 
     public Receipt(Date rentDate, Date promisedReturnDate, Equipment equipment, int quantity, Client client) {

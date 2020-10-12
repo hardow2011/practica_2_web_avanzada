@@ -28,8 +28,8 @@
                 <input <#if view??>readonly</#if> type="number" min="1" class="form-control" id="inputAmountInExistence" name="amountInExistence" value="${(equipment.amountInExistence)!}" placeholder="Digite la cantidad en existencia" required>
                 <label for="inputRentByDayCost">Cantidad para la renta diaria</label>
                 <input <#if view??>readonly</#if> type="number" min="1" class="form-control" id="inputRentByDayCost" name="rentByDayCost" value="${(equipment.rentByDayCost)!}" placeholder="Digite la cantidad por la renta diaria" required>
-                <#if equipment.base64Image?has_content>
                 <label for="inputRawImage">Foto</label>
+                <#if equipment.base64Image?has_content>
                     <div>
                         <img width=315px; src="${equipment.base64Image}" alt"No hay foto">
                     </div>
