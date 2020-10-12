@@ -2,7 +2,7 @@
 <#include "head.ftlh">
 <#include "additionalDependencies.ftlh">
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <@head/>
 <body>
     <@navbar/>
@@ -12,7 +12,7 @@
         </div>
         </body>
         <#if status == "inStock">
-            <div><a href="/equipments/create" class="btn btn-success crear">Nuevo equipo</a></div>
+            <div><a href="/equipments/create" class="btn btn-success crear"><@spring.message "newEquipment"/></a></div>
         </#if>
         <table class="table table-striped">
             <thead>
