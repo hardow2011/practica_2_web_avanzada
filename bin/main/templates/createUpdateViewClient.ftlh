@@ -16,17 +16,17 @@
             editando, no creando, por lo tanto, se visualizará el id.  -->
             <#if client.id != 0>
                 <div class="form-group">
-                    <label for="inputId">Id</label>
-                    <input readonly type="number" class="form-control" id="inputId" name="id" value="${(client.id)!}" placeholder="Digite la matrícula">
+                    <label for="inputId"><@spring.message "id"/></label>
+                    <input readonly type="number" class="form-control" id="inputId" name="id" value="${(client.id)!}">
                 </div>
 
             </#if>
             <div class="form-group">
-                <label for="inputName">Nombre</label>
-                <input <#if view??>readonly</#if> type="text" class="form-control" id="inputName" name="name" value="${(client.name)!}" placeholder="Digite el nombre" required>
-                <label for="inputIdentificationCard">Cédula</label>
-                <input <#if view??>readonly</#if> type="text" class="form-control" id="inputIdentificationCard" name="identificationCard" value="${(client.identificationCard)!}" placeholder="Digite la cédula" required>
-                <label for="inputRawImage">Foto</label>
+                <label for="inputName"><@spring.message "name"/></label>
+                <input <#if view??>readonly</#if> type="text" class="form-control" id="inputName" name="name" value="${(client.name)!}" required>
+                <label for="inputIdentificationCard"><@spring.message "clientIdentificationCard"/></label>
+                <input <#if view??>readonly</#if> type="text" class="form-control" id="inputIdentificationCard" name="identificationCard" value="${(client.identificationCard)!}" required>
+                <label for="inputRawImage"><@spring.message "photo"/></label>
                 <#if client.base64Image?has_content>
                     <div>
                         <img width=315px; src="${client.base64Image}" alt"No hay foto">
@@ -37,9 +37,9 @@
                 </#if>
             </div>
             <#if !view??>
-                <button id="btnSubmitClient" type="submit" class="btn btn-primary float-right">Confirmar</button>
+                <button id="btnSubmitClient" type="submit" class="btn btn-primary float-right"><@spring.message "confirm"/></button>
             <#else>
-                <button id="btnSubmitClient" href="/clients/" class="btn btn-secondary float-right">Regresar a la lista</button>
+                <button id="btnSubmitClient" href="/clients/" class="btn btn-secondary float-right"><@spring.message "goBackToList"/></button>
             </#if>
         </form>
     </div>

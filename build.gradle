@@ -26,6 +26,8 @@ dependencies {
 	//ORM - Hibernate.
     compile 'org.hibernate:hibernate-core:5.4.17.Final'
     compile 'org.hibernate:hibernate-entitymanager:5.4.17.Final'
+	//Security module.
+	compile('org.springframework.boot:spring-boot-starter-security')
 	//
 	// https://mvnrepository.com/artifact/commons-codec/commons-codec
 	compile group: 'commons-codec', name: 'commons-codec', version: '1.5'
