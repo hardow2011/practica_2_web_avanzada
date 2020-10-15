@@ -2,6 +2,7 @@ package com.example.practica_2.controllers;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 import com.example.practica_2.entities.Client;
 import com.example.practica_2.services.ClientServices;
@@ -9,6 +10,7 @@ import com.example.practica_2.services.ClientServices;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,16 +30,19 @@ public class ClientController {
     @Autowired
     private ClientServices clientServices;
 
+    @Autowired
+    private MessageSource messageSource;
+
     /**
      *
      * @param model
      * @return
      */
     @GetMapping({"/", ""})
-    public String listClients(Model model) {
+    public String listClients(Model model, Locale locale) {
         List<Client> clientList = clientServices.findAll();
         model.addAttribute("clientList", clientList);
-        model.addAttribute("action", "Lista de clientes");
+        model.addAttribute("action", messageSource.getMessage("clientsList", null, locale));
         return "listClients";
     }
 
@@ -48,9 +53,9 @@ public class ClientController {
      * @return
      */
     @GetMapping("/create")
-    public String createClient(Model model) {
+    public String createClient(Model model, Locale locale) {
         model.addAttribute("client", new Client());
-        model.addAttribute("action", "Crear cliente");
+        model.addAttribute("action", messageSource.getMessage("createClient", null, locale));
         model.addAttribute("postAddress", "/clients/create");
         return "createUpdateViewClient";
     }
@@ -89,9 +94,9 @@ public class ClientController {
      * @return
      */
     @GetMapping("/update/{clientId}")
-    public String updateClient(Model model, @PathVariable() Long clientId) {
+    public String updateClient(Model model, Locale locale, @PathVariable() Long clientId) {
         Client client = clientServices.findById(clientId);
-        model.addAttribute("action", "Update client: "+clientId.toString());
+        model.addAttribute("action", messageSource.getMessage("createClient", null, locale) + ": " + clientId.toString());
         model.addAttribute("postAddress", "/clients/update");
         model.addAttribute("client", client);
         // model.addAttribute("update", true);
@@ -131,9 +136,9 @@ public class ClientController {
      * @return
      */
     @GetMapping("/view/{clientId}")
-    public String viewClient(Model model, @PathVariable() Long clientId) {
+    public String viewClient(Model model, Locale locale, @PathVariable() Long clientId) {
         Client client = clientServices.findById(clientId);
-        model.addAttribute("action", "View client: "+clientId.toString());
+        model.addAttribute("action", messageSource.getMessage("viewClient", null, locale) + ": " + clientId.toString());
         model.addAttribute("client", client);
         model.addAttribute("view", true);
         return "createUpdateViewClient";

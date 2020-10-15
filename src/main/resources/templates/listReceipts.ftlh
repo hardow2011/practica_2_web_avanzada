@@ -8,10 +8,9 @@
     <@navbar/>
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-4"><@spring.message "usersList"/></h1>
+            <h1 class="display-4"><@spring.message "receiptsList"/></h1>
         </div> 
         </body>
-        <div><a href="/users/create" class="btn btn-success crear"><@spring.message "newUser"/></a></div>
         <table class="table table-striped">
             <thead>
                 <tr>

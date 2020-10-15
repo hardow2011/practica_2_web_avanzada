@@ -16,13 +16,16 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="nav-link" href="/equipments/inStock"><@spring.message "inStock"/></a>
-                    <a class="nav-link" href="/equipments/rented"><@spring.message "equipmentRent"/></a>
+                    <a class="nav-link" href="/equipments/rented"><@spring.message "equipmentsRented"/></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/receipts/"><@spring.message "receipts"/></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/users/"><@spring.message "users"/></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout"><@spring.message "logout"/></a>
                 </li>
         </div>
     </nav>

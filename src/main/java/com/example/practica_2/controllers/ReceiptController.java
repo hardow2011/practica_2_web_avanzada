@@ -3,6 +3,8 @@ package com.example.practica_2.controllers;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import com.example.practica_2.entities.Client;
@@ -15,6 +17,7 @@ import com.example.practica_2.services.EquipmentServices;
 import com.example.practica_2.services.ReceiptServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +38,17 @@ public class ReceiptController {
 
     @Autowired
     private EquipmentServices equipmentServices;
+
+    @Autowired
+    private MessageSource messageSource;
+
+    @GetMapping({"/", ""})
+    public String listReceipts(Model model, Locale locale) {
+        List<Receipt> receiptsList = receiptServices.findAll();
+        model.addAttribute("receiptsList", receiptsList);
+        model.addAttribute("action", messageSource.getMessage("receiptsList", null, locale));
+        return "listReceipts";
+    }
 
     /**
      *
@@ -66,9 +80,9 @@ public class ReceiptController {
     }
 
     @GetMapping("/recover/{receiptId}")
-    public String updateEquipment(Model model, @PathVariable() Long receiptId) {
+    public String updateEquipment(Model model, Locale locale, @PathVariable() Long receiptId) {
         Receipt receipt = receiptServices.findById(receiptId);
-        model.addAttribute("action", "Recuperar equipos");
+        model.addAttribute("action", messageSource.getMessage("recover", null, locale));
         model.addAttribute("postAddress", "/receipts/recover");
         model.addAttribute("receipt", receipt);
         return "createUpdateViewReceipt";

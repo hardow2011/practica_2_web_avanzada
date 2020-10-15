@@ -14,6 +14,7 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import com.example.practica_2.entities.Client;
@@ -29,6 +30,7 @@ import org.hibernate.sql.Insert;
 import org.joda.time.Days;
 import org.joda.time.ReadableInstant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,22 +52,25 @@ public class EquipmentController {
     @Autowired
     private ReceiptRepository receiptRepository;
 
+    @Autowired
+    private MessageSource messageSource;
+
     @GetMapping({ "/", "" })
     public String listEquipments() {
         return "redirect:/equipments/inStock";
     }
 
     @GetMapping("/inStock")
-    public String listEquipmentsInStock(Model model) {
+    public String listEquipmentsInStock(Model model, Locale locale) {
         List<Equipment> equipmentsList = equipmentServices.findAll();
         model.addAttribute("equipmentsList", equipmentsList);
-        model.addAttribute("action", "Lista de equipos disponibles");
+        model.addAttribute("action", messageSource.getMessage("equipmentsList", null, locale));
         model.addAttribute("status", "inStock");
         return "listEquipments";
     }
 
     @GetMapping("/rented")
-    public String listRentedEquipments(Model model) throws ParseException {
+    public String listRentedEquipments(Model model, Locale locale) throws ParseException {
         List<Receipt> receiptsList = receiptRepository.getActiveReceiptsOldestFirst();
         model.addAttribute("equipmentsList", receiptsList);
 
@@ -91,7 +96,7 @@ public class EquipmentController {
 
         model.addAttribute("receiptsList", receiptsList);
         model.addAttribute("differenceInDays", differenceInDays);
-        model.addAttribute("action", "Lista de equipos alquilados");
+        model.addAttribute("action", messageSource.getMessage("rentedEquipmentList", null, locale));
         model.addAttribute("status", "rented");
         return "listEquipments";
     }
@@ -102,9 +107,9 @@ public class EquipmentController {
      * @return
      */
     @GetMapping("/create")
-    public String createEquipment(Model model) {
+    public String createEquipment(Model model, Locale locale) {
         model.addAttribute("equipment", new Equipment());
-        model.addAttribute("action", "Crear equipo");
+        model.addAttribute("action", messageSource.getMessage("createEquipment", null, locale));
         model.addAttribute("postAddress", "/equipments/create");
         return "createUpdateViewEquipment";
     }
@@ -143,9 +148,9 @@ public class EquipmentController {
      * @return
      */
     @GetMapping("/update/{equipmentId}")
-    public String updateEquipment(Model model, @PathVariable() Long equipmentId) {
+    public String updateEquipment(Model model, Locale locale, @PathVariable() Long equipmentId) {
         Equipment equipment = equipmentServices.findById(equipmentId);
-        model.addAttribute("action", "Update equipment: " + equipmentId.toString());
+        model.addAttribute("action", messageSource.getMessage("createEquipment", null, locale) + ": " + equipmentId.toString());
         model.addAttribute("postAddress", "/equipments/update");
         model.addAttribute("equipment", equipment);
         // model.addAttribute("update", true);
@@ -185,9 +190,9 @@ public class EquipmentController {
      * @return
      */
     @GetMapping("/view/{equipmentId}")
-    public String viewEquipment(Model model, @PathVariable() Long equipmentId) {
+    public String viewEquipment(Model model, Locale locale, @PathVariable() Long equipmentId) {
         Equipment equipment = equipmentServices.findById(equipmentId);
-        model.addAttribute("action", "View equipment: " + equipmentId.toString());
+        model.addAttribute("action", messageSource.getMessage("viewEquipment", null, locale) + ": " + equipmentId.toString());
         model.addAttribute("equipment", equipment);
         model.addAttribute("view", true);
         return "createUpdateViewEquipment";
@@ -212,9 +217,9 @@ public class EquipmentController {
      * @return
      */
     @GetMapping("/rent/{equipmentId}")
-    public String rentEquipment(Model model, @PathVariable() Long equipmentId) {
+    public String rentEquipment(Model model, Locale locale, @PathVariable() Long equipmentId) {
         Equipment equipment = equipmentServices.findById(equipmentId);
-        model.addAttribute("action", "View equipment: " + equipmentId.toString());
+        model.addAttribute("action", messageSource.getMessage("viewEquipment", null, locale) + ": " + equipmentId.toString());
         model.addAttribute("equipment", equipment);
         model.addAttribute("view", true);
         model.addAttribute("rent", true);

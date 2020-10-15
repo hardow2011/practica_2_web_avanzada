@@ -29,6 +29,10 @@ public class ReceiptServices {
 
 	public Receipt findById(Long equipmentId) {
 		return receiptRepository.findById(equipmentId).get();
-	}
+    }
+
+    public List<Receipt> findAll(){
+        return receiptRepository.findAll();
+    }
 
 }
