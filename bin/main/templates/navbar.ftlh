@@ -21,6 +21,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/clients/"><@spring.message "receipts"/></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/"><@spring.message "users"/></a>
+                </li>
         </div>
     </nav>
 </#macro>

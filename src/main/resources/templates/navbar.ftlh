@@ -19,7 +19,10 @@
                     <a class="nav-link" href="/equipments/rented"><@spring.message "equipmentRent"/></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/clients/"><@spring.message "receipts"/></a>
+                    <a class="nav-link" href="/receipts/"><@spring.message "receipts"/></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/"><@spring.message "users"/></a>
                 </li>
         </div>
     </nav>
