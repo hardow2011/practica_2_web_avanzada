@@ -17,7 +17,7 @@
             </#if>
             <div class="form-group">
                 <label for="nombreForm">Nombre de usuario</label>
-                <input type="text"  name="username" class="form-control" id="nombreForm" required>
+                <input type="text"  name="nombre" class="form-control" id="nombreForm" required>
             </div>
             <div class="form-group">
                 <label for="passwordInput">Contraseña</label>

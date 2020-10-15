@@ -1,11 +1,16 @@
 package com.example.practica_2.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -15,20 +20,24 @@ import org.hibernate.annotations.ManyToAny;
 @Entity
 public class Role implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    @ManyToMany(mappedBy = "rolesList")
-    private List<User> usersList;
+    @ManyToMany(mappedBy = "rolesList", fetch = FetchType.EAGER)
+    private Set<User> usersList = new HashSet<>();
 
     public Role() {
     }
 
-    public List<User> getUsersList() {
+    public Role(String name) {
+        this.name = name;
+    }
+
+    public Set<User> getUsersList() {
         return usersList;
     }
 
-    public void setUsersList(List<User> usersList) {
+    public void setUsersList(Set<User> usersList) {
         this.usersList = usersList;
     }
 

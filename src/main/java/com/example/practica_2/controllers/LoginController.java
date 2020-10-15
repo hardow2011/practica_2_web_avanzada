@@ -15,7 +15,6 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView getLoginPage(Model model, @RequestParam Optional<String> error) {
         model.addAttribute("action", "Login");
-        model.addAttribute("postAddress", "/login");
         return new ModelAndView("login", "error", error);
     }
 }

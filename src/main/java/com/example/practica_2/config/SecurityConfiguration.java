@@ -61,7 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //Marcando las reglas para permitir unicamente los usuarios
+        //Marcan`do las reglas para permitir unicamente los usuarios
         http
                 .authorizeRequests()
                 .antMatchers("/","/css/**", "/js/**", "/actuator/**", "/webjars/**").permitAll() //permitiendo llamadas a esas urls.
