@@ -10,6 +10,7 @@ import com.example.practica_2.services.UserServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,9 @@ public class UserController {
 
     @Autowired
     private MessageSource messageSource;
+
+    //Para encriptar la información.
+    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping({"/", ""})
     public String listUsers(Model model, Locale locale) {
@@ -53,6 +57,10 @@ public class UserController {
 
         System.out.println("\n\n\n"+isAdmin);
         System.out.println(isAdmin.getClass());
+
+        String encryptedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+
+        user.setPassword(encryptedPassword);
 
         String rolePrefix = "ROLE_";
         /**

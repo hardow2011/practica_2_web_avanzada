@@ -25,7 +25,7 @@
                 <label for="inputUsername"><@spring.message "name"/></label>
                 <input <#if view??>readonly</#if> type="text" class="form-control" id="inputUsername" name="username" value="${(user.username)!}" required>
                 <label for="password"><@spring.message "password"/></label>
-                <input <#if view??>readonly</#if> type="text" class="form-control" id="inputIdentificationCard" name="password" value="${(user.password)!}" required>
+                <input <#if view??>readonly</#if> type="password" class="form-control" id="inputIdentificationCard" name="password" value="${(user.password)!}" required>
                 <input type="checkbox" id="isAdmin" name="isAdmin" value="false">
                 <label for="isAdmin"><@spring.message "isAdmin"/></label><br>
             </div>

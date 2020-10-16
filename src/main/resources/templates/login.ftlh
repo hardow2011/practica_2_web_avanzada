@@ -16,18 +16,18 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </#if>
             <div class="form-group">
-                <label for="nombreForm">Nombre de usuario</label>
+                <label for="nombreForm"><@spring.message "username"/></label>
                 <input type="text"  name="username" class="form-control" id="nombreForm" required>
             </div>
             <div class="form-group">
-                <label for="passwordInput">Contraseña</label>
+                <label for="passwordInput"><@spring.message "password"/></label>
                 <input type="password" id="passwordInput" class="form-control" name="password" required/><br/>
             </div>
             <#--  <div>
                 <input type="checkbox" id="recuerdame" name="recuerdame">
                 <label for="recuerdame">Recuérdame</label><br>
             </div>  -->
-            <button type="submit" class="btn btn-primary">Ingresar</button>
+            <button type="submit" class="btn btn-primary"><@spring.message "login"/></button>
         </form>
 
         </div>
