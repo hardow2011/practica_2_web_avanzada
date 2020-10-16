@@ -44,7 +44,7 @@ public class ReceiptController {
 
     @GetMapping({"/", ""})
     public String listReceipts(Model model, Locale locale) {
-        List<Receipt> receiptsList = receiptServices.findAll();
+        List<Receipt> receiptsList = receiptServices.getInactiveReceiptsOldestFirst();
         model.addAttribute("receiptsList", receiptsList);
         model.addAttribute("action", messageSource.getMessage("receiptsList", null, locale));
         return "listReceipts";
@@ -85,12 +85,15 @@ public class ReceiptController {
         model.addAttribute("action", messageSource.getMessage("recover", null, locale));
         model.addAttribute("postAddress", "/receipts/recover");
         model.addAttribute("receipt", receipt);
+        System.out.println("\n\n\n"+receipt.getId()+"\n\n\n");
         return "createUpdateViewReceipt";
     }
 
     @PostMapping("/recover")
     public String updateEquipment(Receipt receipt, @RequestParam(required = true) int quantityToBeRecovered)
             throws ParseException {
+
+        System.out.println("\n\n\n"+receipt.getId()+"\n\n\n");
 
         // Define the date pattern
         String pattern = "yyyy-MM-dd";
@@ -111,6 +114,17 @@ public class ReceiptController {
         // Else, if a portion of the items are beong recovered, clone the receipt...
         // and set it to return.
         if(quantityToBeRecovered == receipt.getQuantity()){
+            Date parsedReturnDate = simpleDateFormat.parse(receipt.getRentDate().toString());
+            long amountOfDaysRented = TimeUnit.MILLISECONDS.toDays(today.getTime() - parsedReturnDate.getTime());
+
+            // If a day haven't passed since the rent, set as 1
+            if(amountOfDaysRented <= 0){
+                amountOfDaysRented = 1;
+            }
+
+            double totalCost = equipment.getRentByDayCost() * amountOfDaysRented * quantityToBeRecovered;
+            receipt.setTotalCost(totalCost);
+
             receipt.setHasBeenReturned(true);
             receipt.setReturnedDate(today);
         }else{
@@ -121,7 +135,14 @@ public class ReceiptController {
             Date parsedReturnDate = simpleDateFormat.parse(receipt.getRentDate().toString());
             long amountOfDaysRented = TimeUnit.MILLISECONDS.toDays(today.getTime() - parsedReturnDate.getTime());
 
+            // If a day haven't passed since the rent, set as 1
+            if(amountOfDaysRented <= 0){
+                amountOfDaysRented = 1;
+            }
+
             // The total cost is the amount for renting per day, times the amount of days, time the quantity of items.
+            System.out.println("\n\n\n");
+            System.out.println(equipment.getRentByDayCost()+" * "+amountOfDaysRented+" * "+quantityToBeRecovered);
             double totalCost = equipment.getRentByDayCost() * amountOfDaysRented * quantityToBeRecovered;
             newReceipt.setTotalCost(totalCost);
             receiptServices.save(newReceipt);

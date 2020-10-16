@@ -2,7 +2,7 @@
 <#include "head.ftlh">
 <#include "additionalDependencies.ftlh">
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <@head/>
 <body>
     <@navbar/>

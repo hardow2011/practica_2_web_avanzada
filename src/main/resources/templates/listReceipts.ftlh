@@ -14,23 +14,23 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th><@spring.message "id"/></th>
-                    <th><@spring.message "name"/></th>
-                    <th class="text-center"><@spring.message "action"/></th>
+                    <th><@spring.message "clientName"/></th>
+                    <th><@spring.message "equipmentName"/></th>
+                    <th><@spring.message "rentDate"/></th>
+                    <th><@spring.message "promisedReturnDate"/></th>
+                    <th><@spring.message "returnDate"/></th>
+                    <th><@spring.message "totalCost"/></th>
                 </tr>
             </thead>
             <tbody>
-                <#foreach user in usersList>
+                <#foreach receipt in receiptsList>
                 <tr>
-                    <td>${user.id}</td>
-                    <td>${user.username}</td>
-                    <td class="text-center">
-                    <#--  <a class="btn btn-primary" href="/users/update/${user.id}"><@spring.message "update"/></a> |  -->
-                        <#if user.username != "admin">
-                            <#--  <a class="btn btn-info" href="/users/view/${user.id}"><@spring.message "view"/></a> |  -->
-                            <a class="btn btn-danger" href="/users/delete/${user.id}"><@spring.message "delete"/></a>
-                        </#if>
-                    </td>
+                    <td>${receipt.client.name}</td>
+                    <td>${receipt.equipment.name}</td>
+                    <td>${receipt.rentDate}</td>
+                    <td>${receipt.promisedReturnDate}</td>
+                    <td>${receipt.returnedDate}</td>
+                    <td>${receipt.totalCost}</td>
                 </tr>
                 </#foreach>
             </tbody>

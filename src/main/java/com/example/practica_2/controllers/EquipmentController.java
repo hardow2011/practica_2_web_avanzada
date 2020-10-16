@@ -179,6 +179,8 @@ public class EquipmentController {
             equipment.setBase64Image(sb.toString());
         }
 
+        System.out.println("\n\n\nRentbyDate EQController"+equipment.getRentByDayCost());
+
         equipmentServices.save(equipment);
         return "redirect:/equipments/";
     }

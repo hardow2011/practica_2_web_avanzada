@@ -27,6 +27,10 @@ public class ReceiptServices {
         return receiptRepository.getActiveReceiptsOldestFirst();
     }
 
+    public List<Receipt> getInactiveReceiptsOldestFirst() {
+        return receiptRepository.getInactiveReceiptsOldestFirst();
+    }
+
 	public Receipt findById(Long equipmentId) {
 		return receiptRepository.findById(equipmentId).get();
     }

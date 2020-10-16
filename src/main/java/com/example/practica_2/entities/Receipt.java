@@ -48,7 +48,6 @@ public class Receipt implements Serializable {
     }
 
     public Receipt(Date rentDate, Date promisedReturnDate, Equipment equipment, int quantity, Client client) {
-        this.setId(id);
         this.setRentDate(rentDate);
         this.setEquipment(equipment);
         this.setQuantity(quantity);

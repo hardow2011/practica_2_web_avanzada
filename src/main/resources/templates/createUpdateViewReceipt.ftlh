@@ -13,10 +13,12 @@
         <form enctype="multipart/form-data" action=${(postAddress)!} method="post">
 
             <div class="form-group">
-                <label for="inputId"><@spring.message "id"/></label>
-                <input readonly type="number" class="form-control" id="inputId" name="id" value="${(receipt.id)!}">
+                <#--  <label for="inputId"><@spring.message "id"/></label>  -->
+                <input readonly type="hidden" class="form-control" id="inputId" name="id" value="${(receipt.id)!}">
                 <label for="inputName"><@spring.message "clientName"/></label>
                 <input readonly readonly type="text" class="form-control" id="inputName" name="clientName" value="${(receipt.client.name)!}">
+                <label for="inputName"><@spring.message "equipmentName"/></label>
+                <input readonly readonly type="text" class="form-control" id="inputName" name="clientName" value="${(receipt.equipment.name)!}">
                 <label for="inputQuantity"><@spring.message "equipentRentedQuantity"/></label>
                 <input readonly type="number" min="1" max="${(receipt.quantity)!}" value="${(receipt.quantity)!}" class="form-control" id="inputQuantity" name="inputAmountInExistence">
                 <label for="inputRentByDayCost"><@spring.message "equipmentRentByDayCost"/></label>

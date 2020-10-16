@@ -12,4 +12,7 @@ public interface ReceiptRepository extends JpaRepository<Receipt, Long>{
     @Query(value = "SELECT r.* FROM RECEIPT AS r WHERE r.has_been_returned = FALSE ORDER BY r.rent_date ASC", nativeQuery = true)
     List<Receipt> getActiveReceiptsOldestFirst();
 
+    @Query(value = "SELECT r.* FROM RECEIPT AS r WHERE r.has_been_returned = TRUE ORDER BY r.rent_date ASC", nativeQuery = true)
+    List<Receipt> getInactiveReceiptsOldestFirst();
+
 }

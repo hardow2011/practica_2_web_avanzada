@@ -8,7 +8,7 @@
     <@navbar/>
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-4"><@spring.message "equipmentsList"/></h1>
+            <h1 class="display-4"><#if status == "inStock"><@spring.message "equipmentsList"/><#else><@spring.message "rentedEquipmentList"/></#if></h1>
         </div>
         </body>
         <#if status == "inStock">
