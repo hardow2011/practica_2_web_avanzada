@@ -69,7 +69,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/thymeleaf/**", "/freemarker/**", "/api/**", "/jpa/**").permitAll()
                 .antMatchers("/api-docs/**", "/api-docs.yaml", "/swagger-ui.html", "/swagger-ui/**").permitAll() //para OpenApi
                 .antMatchers("/admin/").hasAnyRole("ADMIN", "USER")
-                .anyRequest().permitAll() //cualquier llamada debe ser validada
+                .anyRequest().authenticated() //cualquier llamada debe ser validada
                 .and()
                 .formLogin()
                     .loginPage("/login") //indicando la ruta que estaremos utilizando.
